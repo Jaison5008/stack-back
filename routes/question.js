@@ -3,7 +3,7 @@ var router = express.Router();
 var {Question}=require('../moduels/questionmodule');
 /* GET users listing. */ 
 var{validate}=require('../common/bcrypt')
-router.get('/get',  async function(req, res) {  
+router.get('/',  async function(req, res) {  
   try{
   const user=await Question.find(); 
   if(user){  
