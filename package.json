@@ -21,7 +21,7 @@
     "react-router-dom": "^6.21.1"
   },
   "main": "app.js",
-  "author": "",
+  "author": "jaison",
   "license": "ISC",
   "description": ""
 }
