@@ -62,7 +62,7 @@ router.delete('/delete/:userid/:questionid/:answerid',  async function(req, res)
 
 router.post('/post', async function(req, res) {  
   try{
-  const ques= await Answer.create({userid:req.body.userid,questionid:req.body.questionid,answer:req.body.answer})
+  const ques= await Answer.create({userid:req.body.userid,questionid:req.body.questionid,answer:req.body.answer,nick:req.body.nick})
   
   res.status(200).send({ques,message:'answer post sucess'})
 
@@ -96,6 +96,35 @@ router.patch('/patch/:userid/:questionid/:answerid',  async function(req, res) {
     res.status(500).send({error:'internal server not available'})
   }
 }); 
+ 
+router.patch('/:_id',  async function(req, res) {  
+  try{ 
+    console.log(req.body.voteid)
+  const user=await Answer.findOne({_id:req.params._id});  
+  const vot=(user.voteid.filter((item)=>item===req.body.voteid)) 
+  
+  if(user&&(vot.length===0)){    
+    console.log(req.body.vote)
+    user.vote=req.body.vote;   
+    
+    user.voteid.push(req.body.voteid)
+    //user.voteid=[...user.voteid,req.params._id]
+    
+  user.save(); 
+   
+    res.status(200).send({user,message:'Answer data save sucess'})
+   
+  }else{  
+    res.status(400).send({error:'Answer data not available'})
+
+  }
+
+
+  } catch(error){ 
+    res.status(500).send({error:'internal server not available'})
+  }
+}); 
+
 
 
 module.exports = router;

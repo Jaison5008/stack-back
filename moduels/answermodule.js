@@ -7,7 +7,10 @@ var mongoose=require('mongoose')
     {
         answer:{type:String,required:true},
         userid:{ type:String,required:true},
-        questionid:{ type:String,required:true},
+        questionid:{ type:String,required:true}, 
+        vote:{type:Number,default:0}, 
+        voteid:{type:Array,default:1},  
+        nick:{type:String,default:null},
         createdAt:{type:String,default:ss}
     })
     

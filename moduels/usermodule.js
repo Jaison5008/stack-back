@@ -10,8 +10,9 @@
         
         mobile:{type:String,default:'000-000-0000'},
         password:{type:String,required:true},
-        role:{type:String,default:'user'},
-        createdAt:{type:String,default:ss} ,
+        role:{type:String,default:'user'}, 
+        token:{type:String,default:null},
+        createdAt:{type:String,default:ss} , 
         updateAt:{type:String,default:ss}
     })
     

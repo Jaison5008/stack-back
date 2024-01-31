@@ -13,13 +13,36 @@ const salting= await bcrypt.genSalt(5)
     const tokens=await jwt.sign(payload,secrete,{expiresIn:'2m'}) 
     return tokens;
 }  
-
+const tokening=async(payload)=>{ 
+  const tokens=await jwt.sign(payload,secrete,{expiresIn:'10m'}) 
+  return tokens;
+}  
 
 const compareing=async(password,bodypassword)=>{   
 const compared= await bcrypt.compare(bodypassword,password)  
 return compared 
- }  
+ }   
+ const validates=async(val)=>{    
+  console.log(val)
+      const decodedata=  await jwt.decode(val)  
+      console.log(decodedata)
+   if((((+new Date())/1000)<decodedata.exp)){ 
+    
+     return  true
+  }else{ return false} 
+}
+      
+  
+/*const forgetvalidate=async(val)=>{ 
+      const data=req.headers.authorization.split(" ")[1] 
+    const decodedata=await secrete.decode(val)
+      if((((+new Date())/1000)<decodedata.exp)){
+        res.status(200).send({message:"sucess"})
+    }else{res.status(401).send({error:"time expired"})} 
+  
 
+  
+}
 
 const validate=async(req,res,next)=>{    
   try{
@@ -35,5 +58,5 @@ const validate=async(req,res,next)=>{
   }catch(error){ 
       (res.status(500).send({error:'server error'}))
   }
-}
- module.exports= {hashpassword,token,compareing,validate};
+}*/
+ module.exports= {hashpassword,token,compareing,tokening,validates};
