@@ -80,7 +80,7 @@ router.post('/reset',  async function(req, res) {
     
     to: users.email,
     subject: 'Sending Email using Node.js reset password',
-    text: `http://localhost:3000/${users._id}/${token}`
+    text: `https://front-stack-lake.vercel.app/${users._id}/${token}`
   };
   
   transporter.sendMail(mailOptions, function(error, info){
